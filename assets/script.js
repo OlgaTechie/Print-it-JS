@@ -17,13 +17,64 @@ const slides = [
 	}
 ]
 
-let arrowLeft = document.querySelector(".arrow_left")
+let index = 0
+const bannerImg = document.querySelector(".banner-img");
+const tagLine = document.querySelector(".tagLine")
+
+
+const arrowLeft = document.querySelector(".arrow_left");
 arrowLeft.addEventListener("click", () => {
-	console.log("Left")
+	console.log("Left");
+
+	if (index === 0) {
+		index = slides.length - 1;
+	} else {
+		index--;
+	}
+	actualiserSlide()
 })
 
 
-let arrowRight = document.querySelector(".arrow_right")
+const arrowRight = document.querySelector(".arrow_right");
 arrowRight.addEventListener("click", () => {
-	console.log("Right")
+	console.log("Right");
+
+	if (index === slides.length - 1) {
+		index = 0;
+	} else {
+		index++;
+	}
+	actualiserSlide()
 })
+
+
+const dotsContainer = document.querySelector(".dots");
+const dots = document.querySelectorAll(".dot");
+
+for (let i = 0; i < slides.length; i++) {
+	const dot = document.createElement("div");
+    dot.classList.add("dot");
+	if (i === 0) {
+		dot.classList.add("dot_selected");
+	} 
+    dotsContainer.appendChild(dot);
+}
+	
+
+function actualiserSlide() {
+	bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
+	tagLine.innerHTML = slides[index].tagLine;
+
+	for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("dot_selected");
+    }
+
+	if (dots[index]) {
+		dots[index].classList.add("dot_selected");
+	}
+}
+
+actualiserSlide()
+
+
+  
