@@ -14,8 +14,8 @@ const slides = [
 	{
 		"image":"slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
-	}
-]
+	},
+];
 
 let index = 0
 const bannerImg = document.querySelector(".banner-img");
@@ -24,7 +24,6 @@ const tagLine = document.querySelector(".tagLine")
 
 const arrowLeft = document.querySelector(".arrow_left");
 arrowLeft.addEventListener("click", () => {
-	console.log("Left");
 
 	if (index === 0) {
 		index = slides.length - 1;
@@ -32,12 +31,11 @@ arrowLeft.addEventListener("click", () => {
 		index--;
 	}
 	actualiserSlide()
-})
+});
 
 
 const arrowRight = document.querySelector(".arrow_right");
 arrowRight.addEventListener("click", () => {
-	console.log("Right");
 
 	if (index === slides.length - 1) {
 		index = 0;
@@ -45,11 +43,10 @@ arrowRight.addEventListener("click", () => {
 		index++;
 	}
 	actualiserSlide()
-})
+});
 
 
 const dotsContainer = document.querySelector(".dots");
-const dots = document.querySelectorAll(".dot");
 
 for (let i = 0; i < slides.length; i++) {
 	const dot = document.createElement("div");
@@ -65,16 +62,18 @@ function actualiserSlide() {
 	bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
 	tagLine.innerHTML = slides[index].tagLine;
 
-	for (let i = 0; i < dots.length; i++) {
-        dots[i].classList.remove("dot_selected");
-    }
+	const dotsList = document.querySelectorAll(".dot");
 
-	if (dots[index]) {
-		dots[index].classList.add("dot_selected");
+	for (let i = 0; i < dotsList.length; i++) {
+        dotsList[i].classList.remove("dot_selected");
+	}
+
+	if (dotsList[index]) {
+		dotsList[index].classList.add("dot_selected");
 	}
 }
 
-actualiserSlide()
+actualiserSlide();
 
 
   
